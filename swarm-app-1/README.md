@@ -46,24 +46,31 @@ Here is a basic diagram of how the 5 services will work:
 
 Answer:
 #frontend network:
+
 docker network create --driver overlay frontend
 
 #backend network:
+
 docker network create --driver overlay backend
 
 #vote
+
 $docker service create --replicas 3 --name vote --network frontend -p 81:80 bretfisher/examplevotingapp_vote
 
 #redis
+
 $docker service create --replicas 1 --name redis --network frontend redis:3.2
 
 #worker
+
 $docker service create --replicas 1 --name worker --network frontend --network backend bretfisher/examplevotingapp_worker:java
 
 (If you need to add more network overlay: docker service update --network-add backend worker)
 
 #db
+
 $docker service create --replicas 1 --name db --network backend --mount type=volume,source=db-data,target=/var/lib/postgresql/data postgres:9.4
 
 #result
+
 $docker service create --replicas 1 --name result --network backend -p 5001:80 bretfisher/examplevotingapp_result
