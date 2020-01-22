@@ -44,7 +44,7 @@ Here is a basic diagram of how the 5 services will work:
     - 1 replica
 
 
-Answer:
+## Answer:
 #frontend network:
 docker network create --driver overlay frontend
 
