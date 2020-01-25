@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.1'  #at least version 3.1 is needed
 
 services:
 
@@ -30,4 +30,4 @@ volumes:
 
 secrets:
   psql-pw:
-    external: true
+    external: true  # means you needed to add secret via external command echo "<pw>" | docker secret create psql-pw -
